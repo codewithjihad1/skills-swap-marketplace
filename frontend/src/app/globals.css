@@ -39,3 +39,45 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Line clamp utility for truncating text */
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+/* Swiper custom styles */
+.testimonials-swiper {
+  padding-bottom: 50px !important;
+}
+
+.testimonials-swiper .swiper-slide {
+  height: auto;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet {
+  background: rgb(203 213 225) !important;
+  opacity: 1 !important;
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet-active {
+  background: var(--color-primary) !important;
+  transform: scale(1.2) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .swiper-pagination-custom .swiper-pagination-bullet {
+    background: rgb(75 85 99) !important;
+  }
+
+  .swiper-pagination-custom .swiper-pagination-bullet-active {
+    background: var(--color-primary) !important;
+  }
+}
