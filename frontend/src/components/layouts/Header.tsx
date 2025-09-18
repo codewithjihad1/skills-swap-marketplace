@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
   const toggleUserDropdown = () => setIsUserDropdownOpen(!isUserDropdownOpen);
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-[#FCFAEF] to-[#EBF6ED] border-b border-gray-300 py-3 sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
