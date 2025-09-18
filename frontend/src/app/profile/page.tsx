@@ -461,13 +461,13 @@ const ProfilePage: React.FC = () => {
                       name="name"
                       value={newSkill.name}
                       onChange={handleNewSkillChange}
-                      className="col-span-2 px-3 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      className="col-span-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                     <select
                       name="level"
                       value={newSkill.level}
                       onChange={handleNewSkillChange}
-                      className="px-3 py-2 border text-gray-500 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     >
                       <option value="Beginner">Beginner</option>
                       <option value="Intermediate">Intermediate</option>
@@ -574,23 +574,23 @@ const ProfilePage: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Member since</span>
-                  <span className="font-medium text-gray-600">{user.memberSince}</span>
+                  <span className="font-medium">{user.memberSince}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Skill exchanges</span>
-                  <span className="font-medium text-gray-600">{user.completedExchanges} completed</span>
+                  <span className="font-medium">{user.completedExchanges} completed</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Rating</span>
-                  <span className="font-medium text-gray-600">{user.rating}/5.0</span>
+                  <span className="font-medium">{user.rating}/5.0</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Teaching skills</span>
-                  <span className="font-medium text-gray-600">{user.skillsToTeach.length}</span>
+                  <span className="font-medium">{user.skillsToTeach.length}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Learning skills</span>
-                  <span className="font-medium text-gray-600">{user.skillsToLearn.length}</span>
+                  <span className="font-medium">{user.skillsToLearn.length}</span>
                 </div>
               </div>
             </div>
