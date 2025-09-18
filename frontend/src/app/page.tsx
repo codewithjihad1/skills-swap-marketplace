@@ -4,7 +4,6 @@ import HowItWorks from '@/components/Home/HowItWorks'
 import Matchmaking from '@/components/Home/Matchmaking'
 import Testimonials from '@/components/Home/Testimonials'
 import TrustCommunity from '@/components/Home/TrustCommunity'
-import React from 'react'
 
 export default function page() {
   return (
