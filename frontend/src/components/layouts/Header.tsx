@@ -108,14 +108,15 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
               </div>
             ) : (
               <div className="flex items-center space-x-4">
+               
                 <Link
-                  href="/login"
+                  href="/signin"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Sign In
                 </Link>
                 <Link
-                  href="/register"
+                  href="/signup"
                   className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Get Started
@@ -190,7 +191,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                 ) : (
                   <>
                     <Link
-                      href="/login"
+                      href="/signin"
                       className="block px-3 py-2 text-gray-700 hover:bg-gray-100"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
