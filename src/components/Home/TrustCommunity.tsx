@@ -505,10 +505,18 @@ const TrustCommunity = () => {
                                         }}
                                         viewport={{ once: true }}
                                     >
-                                        <img
+                                        <motion.img
                                             src={item.logo}
                                             alt={item.publication}
                                             className="h-6 max-w-24 object-contain filter dark:invert opacity-70"
+                                            onError={(e) => {
+                                                const target =
+                                                    e.target as HTMLImageElement;
+                                                target.style.display = "none";
+                                                target.nextElementSibling?.classList.remove(
+                                                    "hidden"
+                                                );
+                                            }}
                                         />
                                         <div className="hidden text-lg font-bold text-gray-700 dark:text-gray-300">
                                             {item.publication}

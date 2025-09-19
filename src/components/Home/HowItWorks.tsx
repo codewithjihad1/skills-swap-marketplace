@@ -52,7 +52,7 @@ const HowItWorks = () => {
     ];
 
     return (
-        <section className="bg-[#F3F6FD] py-16 px-6 mt-16">
+        <section className="bg-[#F3F6FD] dark:bg-gray-900 py-16 px-6">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start md:items-center p-6 md:p-10 ">
                 {/* Left Content */}
                 <div
@@ -60,10 +60,10 @@ const HowItWorks = () => {
                     data-aos-duration="1000"
                     className="flex flex-col justify-center"
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-600 mb-6">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">
                         - Our Skill Services
                     </h2>
-                    <p className="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed mb-8">
+                    <p className="text-gray-700 dark:text-gray-300 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed mb-8">
                         Explore and learn new skills through curated courses,
                         expert mentorship, and a supportive community. Enhance
                         your knowledge and grow your expertise with us.
@@ -75,7 +75,7 @@ const HowItWorks = () => {
                             setShowVideo(true);
                             setIsLoading(true);
                         }}
-                        className="flex items-center gap-3 text-indigo-600 hover:text-indigo-500 font-semibold text-lg transition-colors hover:cursor-pointer"
+                        className="flex items-center gap-3 text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 font-semibold text-lg transition-colors hover:cursor-pointer"
                     >
                         <FaPlayCircle size={32} />
                         WATCH HOW IT WORKS
@@ -91,11 +91,11 @@ const HowItWorks = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className={`p-6 rounded-md shadow-lg hover:shadow-2xl transition-all transform 
+                            className={`p-6 rounded-md shadow-lg dark:shadow-gray-700 hover:shadow-2xl dark:hover:shadow-gray-600 transition-all transform 
                 ${
                     index === 0 || index === services.length - 1
-                        ? "bg-[#0862C8] text-white"
-                        : "bg-white text-black"
+                        ? "bg-[#0862C8] dark:bg-blue-700 text-white"
+                        : "bg-white dark:bg-gray-800 text-black dark:text-white"
                 }
                 ${
                     index === 1 || index === services.length - 1
@@ -113,8 +113,8 @@ const HowItWorks = () => {
                             <p
                                 className={`text-sm md:text-base ${
                                     index === 0 || index === services.length - 1
-                                        ? "text-gray-100"
-                                        : "text-gray-600"
+                                        ? "text-gray-100 dark:text-gray-200"
+                                        : "text-gray-600 dark:text-gray-300"
                                 }`}
                             >
                                 {service.desc}
@@ -126,19 +126,19 @@ const HowItWorks = () => {
 
             {/* Video Modal */}
             {showVideo && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 md:p-0">
-                    <div className="bg-black rounded-lg overflow-hidden w-full md:w-3/4 lg:w-1/2 relative">
+                <div className="fixed inset-0 bg-black bg-opacity-70 dark:bg-black dark:bg-opacity-80 flex items-center justify-center z-50 p-4 md:p-0">
+                    <div className="bg-black dark:bg-gray-900 rounded-lg overflow-hidden w-full md:w-3/4 lg:w-1/2 relative">
                         <button
                             onClick={() => setShowVideo(false)}
-                            className="absolute top-3 right-3 text-white text-2xl md:text-3xl font-bold"
+                            className="absolute top-3 right-3 text-white dark:text-gray-200 text-2xl md:text-3xl font-bold hover:text-gray-300 dark:hover:text-white transition-colors"
                         >
                             ✕
                         </button>
 
                         {/* Loading */}
                         {isLoading && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50">
-                                <div className="loader border-t-4 border-indigo-600 rounded-full w-12 h-12 animate-spin"></div>
+                            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50">
+                                <div className="loader border-t-4 border-indigo-600 dark:border-indigo-400 rounded-full w-12 h-12 animate-spin"></div>
                             </div>
                         )}
 
