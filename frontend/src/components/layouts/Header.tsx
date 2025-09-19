@@ -22,8 +22,9 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
 
     const navigation = [
         { name: "Home", href: "/" },
-        { name: "Browse Skills", href: "/browse" },
-        { name: "Work Shop", href: "/work-shop" },
+        { name: "Explore Skills", href: "/explore" },
+        { name: "Post Skill", href: "/post-skill" },
+        { name: "Matchmaking", href: "/matchmaking" },
         { name: "About Us", href: "/about" },
         { name: "Contact", href: "/contact" },
     ];
@@ -53,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                             </span>
                         </Link>
                     </div>
-
+                  
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
                         {navigation.map((item) => (
