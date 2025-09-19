@@ -164,7 +164,7 @@ const Testimonials = () => {
                   {/* Avatar */}
                   <div className="flex justify-center mb-4">
                     <Image
-                      src={testimonial.avatar}
+                      src={testimonial?.avatar}
                       alt={testimonial.name}
                       className="w-16 h-16 rounded-full object-cover border-4 border-primary/20"
                       width={64}
