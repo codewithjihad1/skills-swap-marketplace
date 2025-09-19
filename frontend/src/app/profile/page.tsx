@@ -2,6 +2,7 @@
 // Required when using React hooks like useState, useEffect, etc.
 "use client";
 
+import Image from 'next/image';
 // Import React and necessary hooks from React library
 // useState: Manages component state
 // useEffect: Handles side effects (like API calls)
@@ -312,10 +313,12 @@ const ProfilePage: React.FC = () => {
           <div className="px-6 pb-6 -mt-16">
             <div className="flex flex-col sm:flex-row items-center sm:items-end">
               {/* Profile avatar image */}
-              <img
+              <Image
                 className="h-24 w-24 rounded-full border-4 border-white shadow-md"
                 src={user.avatar}
                 alt={user.name}
+                width={96}
+                height={96}
               />
               
               {/* User name, location, and rating */}

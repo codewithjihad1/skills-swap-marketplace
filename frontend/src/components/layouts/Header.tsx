@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface User {
     id: string;
@@ -82,10 +83,12 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                 >
                                     <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center border-2 border-transparent hover:border-primary/50 transition-all duration-200">
                                         {user.avatar ? (
-                                            <img
+                                            <Image
                                                 src={user.avatar}
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full object-cover"
+                                                width={32}
+                                                height={32}
                                             />
                                         ) : (
                                             <span className="text-gray-600 dark:text-gray-300 font-medium">
@@ -234,7 +237,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                         <div className="flex items-center px-3 py-2 mb-2">
                                             <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center mr-3 border-2 border-primary/20">
                                                 {user.avatar ? (
-                                                    <img
+                                                    <Image
                                                         src={user.avatar}
                                                         alt="Profile"
                                                         className="w-8 h-8 rounded-full object-cover"

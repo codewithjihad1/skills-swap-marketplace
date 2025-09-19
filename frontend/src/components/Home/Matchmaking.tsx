@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface User {
     id: number;
@@ -160,7 +161,7 @@ const Matchmaking = () => {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: "easeOut" },
+            transition: { duration: 0.6 },
         },
     };
 
@@ -170,12 +171,12 @@ const Matchmaking = () => {
             opacity: 1,
             scale: 1,
             rotateY: 0,
-            transition: { duration: 0.5, ease: "backOut" },
+            transition: { duration: 0.5 },
         },
         hover: {
             scale: 1.05,
             y: -10,
-            transition: { duration: 0.3, ease: "easeInOut" },
+            transition: { duration: 0.3 },
         },
     };
 
@@ -185,7 +186,7 @@ const Matchmaking = () => {
             opacity: 1,
             x: 0,
             scale: 1,
-            transition: { duration: 0.6, ease: "backOut" },
+            transition: { duration: 0.6 },
         },
         exit: {
             opacity: 0,
@@ -480,10 +481,12 @@ const Matchmaking = () => {
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center space-x-3">
                                                 <div className="relative">
-                                                    <img
+                                                    <Image
                                                         src={user.avatar}
                                                         alt={user.name}
                                                         className="w-12 h-12 rounded-full border-2 border-gray-200 dark:border-gray-600"
+                                                        width={48}
+                                                        height={48}
                                                     />
                                                     {user.isOnline && (
                                                         <motion.div

@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
+import Image from 'next/image';
 
 interface Testimonial {
   id: number;
@@ -162,10 +163,12 @@ const Testimonials = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col">
                   {/* Avatar */}
                   <div className="flex justify-center mb-4">
-                    <img
+                    <Image
                       src={testimonial.avatar}
                       alt={testimonial.name}
                       className="w-16 h-16 rounded-full object-cover border-4 border-primary/20"
+                      width={64}
+                      height={64}
                     />
                   </div>
 
