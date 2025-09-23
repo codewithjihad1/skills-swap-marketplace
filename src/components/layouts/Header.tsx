@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 interface User {
     id: string;
@@ -17,6 +18,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ user }) => {
+    const {data: session} = useSession();
+    console.log(session);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
     const pathname = usePathname();
@@ -75,16 +78,16 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
 
                     {/* User Section */}
                     <div className="hidden md:flex items-center space-x-4">
-                        {user?.isLoggedIn ? (
+                        {session ? (
                             <div className="relative">
                                 <button
                                     onClick={toggleUserDropdown}
                                     className="flex items-center space-x-2 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900 p-1 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
                                 >
                                     <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center border-2 border-transparent hover:border-primary/50 transition-all duration-200">
-                                        {user.avatar ? (
+                                        {session.user?.image ? (
                                             <Image
-                                                src={user.avatar}
+                                                src={session.user.image}
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full object-cover"
                                                 width={32}
@@ -92,14 +95,14 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                             />
                                         ) : (
                                             <span className="text-gray-600 dark:text-gray-300 font-medium">
-                                                {user.name
-                                                    .charAt(0)
-                                                    .toUpperCase()}
+                                                {session?.user?.name
+                                                    ?.charAt(0)
+                                                    .toUpperCase() || "U"}
                                             </span>
                                         )}
                                     </div>
                                     <span className="text-gray-700 dark:text-gray-300 font-medium">
-                                        {user.name}
+                                        {session.user?.name}
                                     </span>
                                     <svg
                                         className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-200 ${
