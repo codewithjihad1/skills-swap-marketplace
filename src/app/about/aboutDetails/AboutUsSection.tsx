@@ -9,6 +9,7 @@ import {
   Sparkles,
   CheckCircle
 } from 'lucide-react';
+import Image from 'next/image';
 
 const AboutUsSection = () => {
   // Animation variants
@@ -92,7 +93,7 @@ const AboutUsSection = () => {
             <div className="relative z-10">
               {/* Main image - Replace with your actual image path */}
               <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img 
+                <Image 
                   src="/4member.png"
                   alt="SkillShareHub community"
                   className="w-full h-auto object-cover aspect-square"

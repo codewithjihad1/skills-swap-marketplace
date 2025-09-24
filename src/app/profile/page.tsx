@@ -125,6 +125,7 @@ const ProfilePage: React.FC = () => {
       } catch (err) {
         setError('Failed to load profile data');
         setIsLoading(false);
+        console.error(err);
       }
     };
 

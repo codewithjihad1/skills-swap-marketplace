@@ -82,7 +82,7 @@ userSchema.methods.incLoginAttempts = function (this: IUser) {
         });
     }
 
-    const updates: any = { $inc: { loginAttempts: 1 } };
+    const updates: { $inc: { loginAttempts: number }; $set?: { lockUntil: Date } } = { $inc: { loginAttempts: 1 } };
 
     // Lock account after 5 failed attempts for 2 hours
     if (this.loginAttempts + 1 >= 5 && !this.isAccountLocked) {

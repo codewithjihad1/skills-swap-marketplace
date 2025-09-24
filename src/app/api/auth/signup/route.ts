@@ -30,7 +30,8 @@ export async function POST(req: Request) {
     await User.create({ email, password: hashedPassword, name });
 
     return NextResponse.json({ message: "User registered successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Something went wrong" }, { status: 500 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Something went wrong";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

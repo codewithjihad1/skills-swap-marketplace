@@ -11,6 +11,7 @@ import {
   Target,
   HeartHandshake
 } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const TeamSection = () => {
@@ -145,7 +146,7 @@ const TeamSection = () => {
                     
                     {/* Image container - Full circular image */}
                     <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-background shadow-md">
-                      <img
+                      <Image
                         src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

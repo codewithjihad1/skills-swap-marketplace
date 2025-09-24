@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         });
 
         // Send password reset email
-        sendEmail(email, "Password Reset", resetEmailTemplate(`http://localhost:3000/auth/reset-password?token=${resetToken}`, user.firstName, resetTokenExpiry));
+        sendEmail(email, "Password Reset", resetEmailTemplate(`${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`, user.firstName, resetTokenExpiry));
 
         return NextResponse.json(
             {

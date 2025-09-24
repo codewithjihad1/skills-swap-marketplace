@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 // Define TypeScript interface for login form data
 interface LoginForm {
@@ -78,7 +78,7 @@ const LoginPage: React.FC = () => {
 
             if (result?.ok) {
                 // Get session to check user data
-                const session = await getSession();
+                // const session = await getSession();
 
                 // Redirect to dashboard or home page
                 router.push("/dashboard");

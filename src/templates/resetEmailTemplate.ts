@@ -1,4 +1,8 @@
-const resetEmailTemplate = (resetLink: string, name: string, expire: Date) => `<!doctype html>
+const resetEmailTemplate = (
+    resetLink: string,
+    name: string,
+    expire: Date
+) => `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -25,7 +29,7 @@ const resetEmailTemplate = (resetLink: string, name: string, expire: Date) => `<
         </p>
         <p style="margin: 0; font-size: 12px; color: #6b7280;">
           If you didn’t request this, you can safely ignore this email.  
-          This link will expire in ${Math.floor((expire.getTime() - Date.now()) / 3600000)} hours.
+          This link will expire in ${expire.getMinutes()} hours.
         </p>
       </td>
     </tr>
