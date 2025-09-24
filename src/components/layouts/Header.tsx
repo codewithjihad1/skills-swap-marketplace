@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 interface User {
     id: string;
@@ -78,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
 
                     {/* User Section */}
                     <div className="hidden md:flex items-center space-x-4">
-                        {session ? (
+                        {session?.user ? (
                             <div className="relative">
                                 <button
                                     onClick={toggleUserDropdown}
@@ -157,7 +157,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                             Settings
                                         </Link>
                                         <hr className="my-1 border-gray-200 dark:border-gray-600" />
-                                        <button className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200">
+                                        <button onClick={() => signOut()} className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200">
                                             <span className="mr-3">🚪</span>
                                             Sign Out
                                         </button>
@@ -167,13 +167,13 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                         ) : (
                             <div className="flex items-center space-x-4">
                                 <Link
-                                    href="/signin"
+                                    href="/auth/signin"
                                     className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
-                                    href="/signup"
+                                    href="/auth/signup"
                                     className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
                                 >
                                     Get Started
@@ -285,7 +285,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                 ) : (
                                     <>
                                         <Link
-                                            href="/signin"
+                                            href="/auth/signin"
                                             className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-primary dark:hover:text-primary transition-all duration-200 rounded-md mx-2"
                                             onClick={() =>
                                                 setIsMobileMenuOpen(false)
@@ -294,7 +294,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                             Sign In
                                         </Link>
                                         <Link
-                                            href="/signup"
+                                            href="/auth/signup"
                                             className="block px-3 py-2 bg-primary text-white hover:bg-primary/90 rounded-md mx-3 mt-2 text-center font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200"
                                             onClick={() =>
                                                 setIsMobileMenuOpen(false)

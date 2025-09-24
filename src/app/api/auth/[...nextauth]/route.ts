@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-// import { MongoDBAdapter } from "@auth/mongodb-adapter";
-// import clientPromise from "@/lib/mongodb";
 import User from "@/models/User";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
@@ -13,7 +11,6 @@ if (!mongoose.connection.readyState) {
 }
 
 export const authOptions: NextAuthOptions = {
-    // adapter: MongoDBAdapter(clientPromise) as any,
     session: {
         strategy: "jwt" as const,
     },
@@ -24,7 +21,7 @@ export const authOptions: NextAuthOptions = {
                 email: {
                     label: "Email",
                     type: "email",
-                    placeholder: "john@doe.com",
+                    placeholder: "john@example.com",
                 },
                 password: { label: "Password", type: "password" },
             },
@@ -33,26 +30,52 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Missing credentials");
                 }
 
-                // Find user by email
-                const user = await User.findOne({ email: credentials.email });
-                if (!user) {
-                    throw new Error("No user found with this email");
-                }
+                try {
+                    // Find user by email
+                    const user = await User.findOne({
+                        email: credentials.email,
+                    });
+                    if (!user) {
+                        throw new Error("No user found with this email");
+                    }
 
-                // Check password
-                const isValid = await bcrypt.compare(
-                    credentials.password,
-                    user.password
-                );
-                if (!isValid) {
-                    throw new Error("Invalid password");
-                }
+                    // Check if account is locked
+                    if (user.isAccountLocked) {
+                        const lockTime = Math.ceil(
+                            (user.lockUntil!.getTime() - Date.now()) /
+                                (1000 * 60)
+                        );
+                        throw new Error(
+                            `Account locked. Try again in ${lockTime} minutes`
+                        );
+                    }
 
-                return {
-                    id: user._id.toString(),
-                    email: user.email,
-                    name: user.name,
-                };
+                    // Check password
+                    const isValid = await bcrypt.compare(
+                        credentials.password,
+                        user.password
+                    );
+                    if (!isValid) {
+                        // Increment failed login attempts
+                        await user.incLoginAttempts();
+                        throw new Error("Invalid password");
+                    }
+
+                    // Reset login attempts on successful login
+                    if (user.loginAttempts > 0) {
+                        await user.resetLoginAttempts();
+                    }
+
+                    return {
+                        id: user._id.toString(),
+                        email: user.email,
+                        name: user.name,
+                        isVerified: user.isVerified,
+                    };
+                } catch (error) {
+                    console.error("Authorization error:", error);
+                    throw error;
+                }
             },
         }),
     ],
@@ -61,9 +84,17 @@ export const authOptions: NextAuthOptions = {
         error: "/auth/error",
     },
     callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+                token.isVerified = (user as any).isVerified;
+            }
+            return token;
+        },
         async session({ session, token }) {
             if (session.user && token.sub) {
                 session.user.id = token.sub;
+                (session.user as any).isVerified = token.isVerified;
             }
             return session;
         },
