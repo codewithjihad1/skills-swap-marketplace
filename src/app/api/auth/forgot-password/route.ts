@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/User";
 import mongoose from "mongoose";
 import crypto from "crypto";
+import { sendEmail } from "@/lib/nodemailerTransporter";
+import resetEmailTemplate from "@/templates/resetEmailTemplate";
 
 // Connect to MongoDB
 if (!mongoose.connection.readyState) {
@@ -42,11 +44,8 @@ export async function POST(req: NextRequest) {
             resetPasswordExpires: resetTokenExpiry,
         });
 
-        // In a real application, you would send an email here
-        // For now, we'll just log it (in production, remove this and implement email sending)
-        console.log(
-            `Password reset link for ${email}: http://localhost:3000/auth/reset-password?token=${resetToken}`
-        );
+        // Send password reset email
+        sendEmail(email, "Password Reset", resetEmailTemplate(`http://localhost:3000/auth/reset-password?token=${resetToken}`, user.firstName, resetTokenExpiry));
 
         return NextResponse.json(
             {
