@@ -39,14 +39,12 @@ export const authOptions: NextAuthOptions = {
                         throw new Error("No user found with this email");
                     }
 
-                    // Check if account is locked
-                    if (user.isAccountLocked) {
-                        const lockTime = Math.ceil(
-                            (user.lockUntil!.getTime() - Date.now()) /
-                                (1000 * 60)
-                        );
+                    // Check if account is locked and get detailed info
+                    const lockoutInfo = user.getLockoutInfo();
+                    if (lockoutInfo.isLocked) {
                         throw new Error(
-                            `Account locked. Try again in ${lockTime} minutes`
+                            lockoutInfo.reason ||
+                                `Account locked. Try again in ${lockoutInfo.remainingTime} minutes`
                         );
                     }
 
@@ -58,6 +56,17 @@ export const authOptions: NextAuthOptions = {
                     if (!isValid) {
                         // Increment failed login attempts
                         await user.incLoginAttempts();
+
+                        // Check if this attempt caused a lockout
+                        const updatedUser = await User.findById(user._id);
+                        if (updatedUser?.isAccountLocked) {
+                            const newLockoutInfo = updatedUser.getLockoutInfo();
+                            throw new Error(
+                                newLockoutInfo.reason ||
+                                    "Account has been temporarily locked due to multiple failed login attempts"
+                            );
+                        }
+
                         throw new Error("Invalid password");
                     }
 
@@ -74,6 +83,19 @@ export const authOptions: NextAuthOptions = {
                     };
                 } catch (error) {
                     console.error("Authorization error:", error);
+
+                    // Log security events for monitoring
+                    if (error instanceof Error) {
+                        if (
+                            error.message.includes("Account locked") ||
+                            error.message.includes("Invalid password")
+                        ) {
+                            console.warn(
+                                `Security event: ${error.message} for email: ${credentials.email}`
+                            );
+                        }
+                    }
+
                     throw error;
                 }
             },
@@ -87,7 +109,9 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
-                token.isVerified = (user as { isVerified?: boolean }).isVerified;
+                token.isVerified = (
+                    user as { isVerified?: boolean }
+                ).isVerified;
             }
             return token;
         },

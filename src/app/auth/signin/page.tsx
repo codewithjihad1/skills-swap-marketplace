@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import AccountStatus from "@/components/auth/AccountStatus";
 
 // Define TypeScript interface for login form data
 interface LoginForm {
@@ -124,6 +125,13 @@ const LoginPage: React.FC = () => {
                     <p className="text-sm text-gray-400 mt-1">
                         Welcome back! Please enter your details.
                     </p>
+
+                    {/* Account Status - Show lockout info if available */}
+                    {formData.email && (
+                        <div className="mt-4">
+                            <AccountStatus email={formData.email} />
+                        </div>
+                    )}
 
                     {/* Error Message Display */}
                     {error && (

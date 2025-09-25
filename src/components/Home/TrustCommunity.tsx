@@ -508,6 +508,8 @@ const TrustCommunity = () => {
                                         <Image
                                             src={item.logo}
                                             alt={item.publication}
+                                            width={120}
+                                            height={60}
                                             className="h-6 max-w-24 object-contain filter dark:invert opacity-70"
                                         />
                                         <div className="hidden text-lg font-bold text-gray-700 dark:text-gray-300">
