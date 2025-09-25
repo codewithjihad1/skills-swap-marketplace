@@ -140,10 +140,7 @@ export const authOptions: NextAuthOptions = {
                         existingUser = await User.create({
                             name: user.name || profile?.name || "Unknown User",
                             email: user.email,
-                            image:
-                                user.image ||
-                                profile?.picture ||
-                                profile?.avatar_url,
+                            image: user.image,
                             isVerified: true, // Social accounts are considered verified
                             provider: account.provider,
                             providerId: account.providerAccountId,
@@ -169,7 +166,7 @@ export const authOptions: NextAuthOptions = {
 
                     // Update the user object with our database user info
                     user.id = existingUser._id.toString();
-                    user.isVerified = existingUser.isVerified;
+                    (user as any).isVerified = existingUser.isVerified;
                 }
 
                 return true;

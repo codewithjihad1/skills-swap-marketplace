@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import AuthProvider from "@/provider/AuthProvider";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,14 +27,25 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html
+            lang="en"
+            className="dark"
+            style={{ "--color-scheme": "dark" } as React.CSSProperties}
+        >
             <AuthProvider>
                 <body
                     className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
-                    <Header />
-                    {children}
-                    <Footer />
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        // disableTransitionOnChange
+                    >
+                        <Header />
+                        {children}
+                        <Footer />
+                    </ThemeProvider>
                 </body>
             </AuthProvider>
         </html>

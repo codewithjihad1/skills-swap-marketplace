@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
+import { ModeToggle } from "../theme/toggle-theme";
 
 interface User {
     id: string;
@@ -74,6 +75,9 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                             </Link>
                         ))}
                     </div>
+
+                    {/* Theme Toggle */}
+                    <ModeToggle />
 
                     {/* User Section */}
                     <div className="hidden md:flex items-center space-x-4">
