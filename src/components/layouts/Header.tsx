@@ -18,8 +18,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ user }) => {
-    const {data: session} = useSession();
-    console.log(session);
+    const { data: session } = useSession();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
     const pathname = usePathname();
@@ -87,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                                     <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center border-2 border-transparent hover:border-primary/50 transition-all duration-200">
                                         {session.user?.image ? (
                                             <Image
-                                                src={session.user.image}
+                                                src={session?.user?.image}
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full object-cover"
                                                 width={32}

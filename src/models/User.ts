@@ -12,7 +12,10 @@ export interface IUser extends Document {
     _id: mongoose.Types.ObjectId;
     name: string;
     email: string;
-    password: string;
+    password?: string; // Optional for social login users
+    image?: string; // Profile image from social providers
+    provider?: string; // Social provider (google, github)
+    providerId?: string; // ID from social provider
     emailVerified?: Date;
     isVerified: boolean;
     verificationToken?: string;
@@ -47,13 +50,25 @@ const userSchema = new Schema(
         },
         password: {
             type: String,
-            required: true,
+            required: function (this: IUser) {
+                // Password only required for non-social login users
+                return !this.provider;
+            },
             minlength: [6, "Password must be at least 6 characters long"],
         },
         name: {
             type: String,
             required: true,
             trim: true,
+        },
+        image: {
+            type: String, // Profile image URL from social providers
+        },
+        provider: {
+            type: String, // 'google', 'github', etc.
+        },
+        providerId: {
+            type: String, // ID from the social provider
         },
         emailVerified: {
             type: Date,
