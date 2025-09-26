@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import { motion } from 'framer-motion';
 import { 
@@ -93,8 +93,10 @@ const AboutUsSection = () => {
             <div className="relative z-10">
               {/* Main image - Replace with your actual image path */}
               <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <Image 
+                <Image
                   src="/4member.png"
+                  width={500}
+                  height={500}
                   alt="SkillShareHub community"
                   className="w-full h-auto object-cover aspect-square"
                 />
