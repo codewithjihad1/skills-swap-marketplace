@@ -40,7 +40,7 @@ const HowItWorks = () => {
      <section className="bg-[#F3F6FD] dark:bg-gray-900 py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start md:items-center p-6 md:p-10 ">
         {/* Left Content */}
-        <div data-aos="fade-right" data-aos-duration="1000" className="flex flex-col justify-center">
+        <div data-aos="fade-up" data-aos-duration="1000" className="flex flex-col justify-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-600 dark:text-gray-100 mb-6">
             - Our Skill Services
           </h2>
@@ -63,7 +63,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Right Cards */}
-        <div data-aos="fade-left" data-aos-duration="1000" className="grid grid-cols-1 sm:grid-cols-2 gap-6 hover:cursor-pointer">
+        <div data-aos="fade-down" data-aos-duration="1000" className="grid grid-cols-1 sm:grid-cols-2 gap-6 hover:cursor-pointer">
           {services.map((service, index) => (
             <div
               key={index}
